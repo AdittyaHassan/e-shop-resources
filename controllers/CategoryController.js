@@ -7,10 +7,10 @@ import prisma from "../config/client.js"
  * @endpoint /api/v1/brand
  */
 
-export const getAllBrands = asyncHandler(async(req,res)=>{
+export const getAllCategory = asyncHandler(async(req,res)=>{
 
     //get all brand data from db
-    const data = await prisma.brand.findMany();
+    const data = await prisma.category.findMany();
    
     //response
     res.status(200).json({"brands": data});
@@ -19,18 +19,18 @@ export const getAllBrands = asyncHandler(async(req,res)=>{
 
 
 /**
- * get single brand
+ * get single Category
  * @method Get
- * @endpoint api/v1/brand/:id
+ * @endpoint api/v1/Category/:id
  */
 
-export const getSingleBrand = asyncHandler(async(req,res)=>{
+export const getSingleCategory = asyncHandler(async(req,res)=>{
 
-    //get brand id
+    //get Category id
     const {id} = req.params; 
 
-    //fet all brand from db
-    const data = await prisma.brand.findUnique({
+    //fet all Category from db
+    const data = await prisma.category.findUnique({
         where: {id}
     });
    
@@ -40,19 +40,19 @@ export const getSingleBrand = asyncHandler(async(req,res)=>{
 
 
 /**
- * create single brand
+ * create single Category
  * @method Post
- * @endpoint api/v1/brand/:id
+ * @endpoint api/v1/Category
  */
 
-export const createBrand = asyncHandler(async(req,res)=>{
+export const createCategory = asyncHandler(async(req,res)=>{
 
 
-    const data = await prisma.Brand.create({
+    const data = await prisma.category.create({
         data: {
             name : req.body.name,
             slug : req.body.slug,
-            logo : req.body.path
+            photo : req.body.path
         }
     });
    
@@ -67,18 +67,18 @@ export const createBrand = asyncHandler(async(req,res)=>{
  * @endpoint api/v1/brand/:id
  */
 
-export const deleteBrand = asyncHandler(async(req,res)=>{
+export const deleteCategory = asyncHandler(async(req,res)=>{
 
     //get id
     const {id} = req.params;
 
     //get all brand data from db
-    const data = await prisma.brand.delete({
+    const data = await prisma.category.delete({
         where : {id}
     });
    
     //response
-    res.status(200).json({"brands": data});
+    res.status(200).json({data});
 });
 
 
@@ -90,17 +90,17 @@ export const deleteBrand = asyncHandler(async(req,res)=>{
  * @endpoint api/v1/brand/:id
  */
 
-export const updateBrand = asyncHandler(async(req,res)=>{
+export const updateCategory = asyncHandler(async(req,res)=>{
 
     //get id
     const {id} = req.params;
 
     //get all brand data from db
-    const data = await prisma.brand.update({
+    const data = await prisma.category.update({
         where : {id},
         data: req.body
     });
    
     //response
-    res.status(200).json({"brands": data});
+    res.status(200).json({data});
 });

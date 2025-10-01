@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import brandRouter from "./router/brand.js";
+import categoryRouter from "./router/category.js";
 
 
 
@@ -15,7 +16,8 @@ app.use(express.urlencoded({extended : false}));
 
 
 //routing
-app.use("/brand", brandRouter);
+app.use("/api/v1/brand", brandRouter);
+app.use("/api/v1/category", categoryRouter);
 
 
 
